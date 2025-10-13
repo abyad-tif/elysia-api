@@ -1,6 +1,10 @@
 import { Elysia, t } from "elysia";
 
-import { createPosts, getPosts } from "../controllers/PostController";
+import {
+  createPosts,
+  getPostById,
+  getPosts,
+} from "../controllers/PostController";
 
 const Routes = new Elysia({ prefix: "/posts" })
 
@@ -21,6 +25,8 @@ const Routes = new Elysia({ prefix: "/posts" })
         }),
       }),
     }
-  );
+  )
+
+  .get("/:id", ({ params: { id } }) => getPostById(id));
 
 export default Routes;

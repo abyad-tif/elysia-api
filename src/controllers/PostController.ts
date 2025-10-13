@@ -33,6 +33,33 @@ export async function createPosts(options: { title: string; content: string }) {
       data: post,
     };
   } catch (e: unknown) {
-    console.log(`Error creating post: ${e}`);
+    console.error(`Error creating post: ${e}`);
+  }
+}
+
+// Fungsi Show Data By ID
+export async function getPostById(id: string) {
+  try {
+    const postId = parseInt(id);
+
+    const post = await prisma.post.findUnique({
+      where: { id: postId },
+    });
+
+    if (!post) {
+      return {
+        success: true,
+        message: "Detail Data Post not found!",
+        data: null,
+      };
+    }
+
+    return {
+      success: true,
+      message: `Detail Data Post By ID : ${id}`,
+      data: post,
+    };
+  } catch (e: unknown) {
+    console.error(`Error creating post: ${e}`);
   }
 }
