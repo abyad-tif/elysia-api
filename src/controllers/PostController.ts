@@ -91,3 +91,21 @@ export async function updatePost(
     console.error(`Error updating post: ${e}`);
   }
 }
+
+// Fungsi Delete Data
+export async function deletePost(id: string) {
+  try {
+    const postId = parseInt(id);
+
+    await prisma.post.delete({
+      where: { id: postId },
+    });
+
+    return {
+      success: true,
+      message: "Post deleted successfully!",
+    };
+  } catch (e: unknown) {
+    console.error(`Error deleting post: ${e}`);
+  }
+}
